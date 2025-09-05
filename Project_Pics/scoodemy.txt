@@ -1,0 +1,2098 @@
+student_login
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+public class student_login extends javax.swing.JFrame {
+
+    /**
+     * Creates new form student_login
+     */
+    public student_login() {
+        initComponents();
+    }
+
+     void clear()
+  {
+      pass1.setText("");
+      pass1.setText("");
+      
+  }
+     void clear1()
+  {
+      
+      pass1.setText("");
+      
+  }
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        login_entry le =new login_entry();
+        le.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        le.setVisible(true);
+    }                                              
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+            String s_id = stud_id.getText();
+    String pass2 = pass1.getText();
+
+    try {
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+
+        String sql = "SELECT * FROM student WHERE st_id = '" + s_id + "' AND password = '" + pass2 + "'";
+        ResultSet rs = st.executeQuery(sql);
+
+        if (rs.next()) {
+            // Retrieve student details from the ResultSet
+            String studentId = rs.getString("st_id");
+            String studentName = rs.getString("name");
+            String studentAge = rs.getString("age");
+            String studentStd = rs.getString("stnd");
+            String studentMail = rs.getString("email");
+
+            try {
+                stud_display sd1 = new stud_display(studentId, studentName, studentAge, studentStd, studentMail);
+                sd1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                sd1.setVisible(true);
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, " error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Username or password is incorrect | New user means Sign Up");
+            clear1(); // Clear the input fields
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }                                              
+    
+    
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+               stud_signUp ss =new stud_signUp();
+               ss.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               ss.setVisible(true);
+    }                                              
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        clear();
+    }                                              
+
+    private void pass1ActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }                                     
+
+    private void stud_idActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+	public void run() {
+               
+               student_login sl =new student_login();
+               sl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               sl.setVisible(true);
+            }
+        });
+
+        // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JTextField pass1;
+    private javax.swing.JTextField stud_id;
+    // End of variables declaration                   
+}
+------------------------
+Admin Login
+
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class admin_login extends javax.swing.JFrame {
+
+    /**
+     * Creates new form admin_login
+     */
+    public admin_login() {
+        initComponents();
+    }
+
+     void clear()
+  {
+      user.setText("");
+      pass.setText("");
+      
+  }
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        login_entry le =new login_entry();
+               le.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               le.setVisible(true);
+    }                                              
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        clear();
+    }                                              
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        String u_id=user.getText();
+        String pass1=pass.getText();
+        
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            String sql = "select *from admin where username = '"+u_id+"' and password = '"+pass1+"'";
+            
+            ResultSet rs=st.executeQuery(sql);
+            if(rs.next())
+            {
+                
+               admin_mgmt am =new admin_mgmt();
+               am.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               am.setVisible(true); 
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"username or password is incorrect");
+                clear();
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+            
+        }
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+	public void run() {
+                
+               admin_login al =new admin_login();
+               al.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               al.setVisible(true);
+            }
+        });
+    }
+	private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField pass;
+    private javax.swing.JTextField user;
+    // End of variables declaration                   
+}
+--------------------------
+Parent_login
+
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class parent_login extends javax.swing.JFrame {
+
+    /**
+     * Creates new form parent_login
+     */
+    public parent_login() {
+        initComponents();
+    }
+
+     void clear()
+  {
+      parent_id.setText("");
+      pass.setText("");
+   }
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        login_entry le =new login_entry();
+        le.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        le.setVisible(true);
+    }                                              
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
+
+    private void parent_idActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        String s_id = parent_id.getText();
+    String pass2 = pass.getText();
+
+    try {
+        // Establish database connection
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+
+        // SQL query to check user credentials
+        String sql = "SELECT * FROM parents WHERE parent_id = '" + s_id + "' AND password = '" + pass2 + "'";
+        ResultSet rs = st.executeQuery(sql);
+
+        // Check if the user exists
+        if (rs.next()) {
+            // Retrieve student details from the ResultSet
+            String studentId = rs.getString("student_id");
+            
+            try {
+                // Pass student details to the stud_display class
+                Parent_display pd = new Parent_display(studentId);
+                pd.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                pd.setVisible(true);
+            } catch (NullPointerException e) {
+                // If there is an issue with the stud_display resources
+                JOptionPane.showMessageDialog(null, " error: " + e.getMessage());
+                e.printStackTrace();
+            }
+          
+        } 
+        else 
+        {
+            // User not found: Show an error message
+            JOptionPane.showMessageDialog(null, "Username or password is incorrect | New user means Sign Up");
+             // Clear the input fields
+        }
+    } catch (SQLException e) {
+        // SQL-related exceptions
+        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Catch any other general exceptions
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage());
+        e.printStackTrace();
+    }    
+    
+            
+    }                                              
+
+    
+    
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        clear();
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+		java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+               parent_login pl =new parent_login();
+               pl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               pl.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField parent_id;
+    private javax.swing.JTextField pass;
+    // End of variables declaration                   
+}
+
+
+------------------------------
+Teacher Login
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        login_entry le =new login_entry();
+        le.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        le.setVisible(true);
+    }                                              
+
+    private void pass4ActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }                                     
+
+    private void teacher_idActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        String teach_id=teacher_id.getText();
+        String teach_pass=pass4.getText();
+        
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            String sql = "select *from teacher where t_id = '"+teach_id+"' and t_password = '"+teach_pass+"'";
+            
+            ResultSet rs=st.executeQuery(sql);
+            if(rs.next())
+            {
+                String TeacherId = rs.getString("t_id");
+                String TeacherName = rs.getString("t_name");
+                String CourseId = rs.getString("course_id");
+                String CourseName = rs.getString("t_subject");
+                
+               try 
+               {
+                // Pass student details to the stud_display class
+                teach_display td = new teach_display(TeacherId,TeacherName, CourseId , CourseName);
+                td.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                td.setVisible(true);
+                } 
+               catch (NullPointerException e) 
+               {
+                // If there is an issue with the stud_display resources
+                JOptionPane.showMessageDialog(null, " error: " + e.getMessage());
+                e.printStackTrace();
+                }
+            } 
+            else {
+            // User not found: Show an error message
+            JOptionPane.showMessageDialog(null, "Username or password is incorrect ");
+            clear(); // Clear the input fields
+        }
+    } catch (SQLException e) {
+        // SQL-related exceptions
+        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Catch any other general exceptions
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage());
+        e.printStackTrace();
+    }
+        
+
+       
+    }                                              
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        clear();
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+	 public void run() {
+                
+               teacher_login tl =new teacher_login();
+               tl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               tl.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField pass4;
+    private javax.swing.JTextField teacher_id;
+    // End of variables declaration                   
+}
+------------
+Student_sign_up
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class stud_signUp extends javax.swing.JFrame {
+
+    /**
+     * Creates new form stud_signUp
+     */
+    public stud_signUp() {
+        initComponents();
+    }
+    void clear()
+  {
+      stud_id1.setText("");
+      stud_name.setText("");
+      stud_age.setText("");
+      stud_mail.setText("");
+      stud_pass.setText("");
+      
+  }
+    public boolean isNameValid(String name) {
+        return name.matches("[a-zA-Z\\s]+");
+    }
+
+    public boolean isAgeValid(String age) {
+        try {
+            int ageNum = Integer.parseInt(age);
+            return ageNum > 5 && ageNum < 13;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public boolean isStandardValid(String standard) {
+        try {
+            int std = Integer.parseInt(standard);
+            return std >= 1 && std <= 5;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public boolean isEmailValid(String email) {
+        return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    public boolean isPasswordValid(String password) {
+        return password.length() >= 6;
+    }
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+               student_login sl =new student_login();
+               sl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               sl.setVisible(true);
+    }                                              
+
+    private void stud_nameActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void stud_id1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void stud_ageActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void stud_mailActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void stud_passActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+       String st_id1 = stud_id1.getText().trim();
+    String st_name = stud_name.getText().trim();
+    String st_age = stud_age.getText().trim();
+    String st_std = stud_stand.getText().trim();
+    String st_mail = stud_mail.getText().trim();
+    String pass3 = stud_pass.getText().trim();
+
+    // Form validation
+    if (st_id1.isEmpty() || st_name.isEmpty() || st_age.isEmpty() || st_std.isEmpty() || st_mail.isEmpty() || pass3.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please fill out all fields.");
+        return; // Stop further execution if any field is empty
+    }
+
+    // Name validation (only letters allowed)
+    if (st_id1.isEmpty() || st_name.isEmpty() || st_age.isEmpty() || st_std.isEmpty() || st_mail.isEmpty() || pass3.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill out all fields.");
+            return;
+        }
+        if (!isNameValid(st_name)) {
+            JOptionPane.showMessageDialog(null, "Name should contain only letters and spaces.");
+            return;
+        }
+        if (!isAgeValid(st_age)) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid age [6 to 12].");
+            return;
+        }
+        if (!isStandardValid(st_std)) {
+            JOptionPane.showMessageDialog(null, "Standard should be between 1 and 5.");
+            return;
+        }
+        if (!isEmailValid(st_mail)) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
+            return;
+        }
+        if (!isPasswordValid(pass3)) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long.");
+            return;
+        }
+
+    // Insert into database
+    try {
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+        st.executeUpdate("insert into student values('" + st_id1 + "','" + st_name + "','" + st_age + "','" + st_std + "','" + st_mail + "','" + pass3 + "', null, null, null)");
+
+        JOptionPane.showMessageDialog(null, "Successfully Updated");
+        clear();
+
+        // Open student login screen
+        student_login sl = new student_login();
+        sl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        sl.setVisible(true);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
+    }                                              
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        clear();
+    }                                              
+
+    private void stud_standActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+	 public void run() {
+                
+               stud_signUp ss =new stud_signUp();
+               ss.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               ss.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JTextField stud_age;
+    private javax.swing.JTextField stud_id1;
+    private javax.swing.JTextField stud_mail;
+    private javax.swing.JTextField stud_name;
+    private javax.swing.JTextField stud_pass;
+    private javax.swing.JTextField stud_stand;
+    // End of variables declaration                   
+}
+------------------
+Admin_Management
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class admin_mgmt extends javax.swing.JFrame {
+public void tableDetails()
+    {
+        DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from teacher");
+            while(rs.next())
+            {
+                dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(4),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)});
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void tableDetails2()
+    {
+        DefaultTableModel dtm=(DefaultTableModel) jTable2.getModel();
+        dtm.setRowCount(0);
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from student");
+            while(rs.next())
+            {
+                dtm.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)});
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    /**
+     * Creates new form admin_mgmt
+     */
+    public admin_mgmt() {
+        initComponents();
+        tableDetails();
+        tableDetails2();
+    }
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+               admin_login al =new admin_login();
+               al.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               al.setVisible(true);
+    }                                              
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+           try
+        {
+            jTable2.print(JTable.PrintMode.FIT_WIDTH);
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
+    }                                              
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        
+    }                                              
+
+    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+               Add_teacher at =new Add_teacher();
+               at.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               at.setVisible(true);
+    }                                              
+
+    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        tableDetails2();
+    }                                              
+
+    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+          try
+        {
+            jTable1.print(JTable.PrintMode.FIT_WIDTH);
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+               admin_mgmt am =new admin_mgmt();
+               am.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               am.setVisible(true); 
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JToggleButton jToggleButton6;
+    private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JToggleButton jToggleButton9;
+}
+-----------------------------
+Student_Display
+
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class stud_display extends javax.swing.JFrame {
+
+    /**
+     * Creates new form stud_display
+     */
+    public stud_display(String studentId, String studentName, String studentAge, String studentStd, String studentMail) {
+        initComponents(); // Initialize components (should be auto-generated)
+        
+        // Set student information to the respective labels
+        sd_id.setText( studentId);
+        sd_name.setText( studentName);
+        sd_age.setText( studentAge);
+        sd_std.setText( studentStd);
+        sd_mail.setText( studentMail);
+    }
+
+    public stud_display() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+             
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        student_login sl =new student_login();
+               sl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               sl.setVisible(true);
+    }                                              
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:String studentId = stud_id.getText(); // Get student ID
+        String studentId = sd_id.getText(); // Get student ID
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Clear previous rows
+
+    try {
+        // Database connection
+        Connection con = ConnectionProvider.getCon();
+
+        // Query to fetch attendance for the student
+        String sql = "SELECT c.course_name, a.attendance_date, a.status "
+                   + "FROM Attendance a JOIN Courses c ON a.course_id = c.course_id "
+                   + "WHERE a.st_id = ? ORDER BY a.attendance_date";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, studentId);
+        ResultSet rs = pstmt.executeQuery();
+
+        // Populate the table with attendance data
+        while (rs.next()) {
+            String courseName = rs.getString("course_name");
+            String date = rs.getString("attendance_date");
+            String status = rs.getString("status");
+
+            // Add row to table
+            model.addRow(new Object[]{courseName, date, status});
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error fetching attendance: " + e.getMessage());
+        e.printStackTrace();
+    }
+        
+    }                                              
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        String studentId = sd_id.getText(); 
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+    try {
+        Connection con = ConnectionProvider.getCon(); // Ensure you have a method to get the database connection
+        
+       String sql = "SELECT c.course_id, c.course_name, qa.marks, qa.attempt_date " +
+             "FROM courses c " +
+             "JOIN enrollments e ON c.course_id = e.course_id " +
+             "JOIN quiz_attempts qa ON e.course_id = qa.course_id AND e.st_id = qa.student_id " + 
+             "WHERE e.st_id = ?";
+
+                     
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, studentId);  // Set the student ID in the query
+        ResultSet rs = pstmt.executeQuery();
+
+        // Clear previous data in the table model
+        model.setRowCount(0);
+
+        // Loop through the result set and populate the table model
+        while (rs.next()) {
+            String courseId = rs.getString("course_id");
+            String courseName = rs.getString("course_name");
+            int marks = rs.getInt("marks");
+            java.sql.Date date = rs.getDate("attempt_date");
+
+            // Add a new row to the table model
+            model.addRow(new Object[]{courseId, courseName, marks, date});
+        }
+
+        // Close resources
+        rs.close();
+        pstmt.close();
+        con.close();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error loading course data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }                                              
+
+    private void sd_nameActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    private void sd_ageActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void sd_stdActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void sd_mailActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    private void sd_idActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }                                     
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        String Stud_id=sd_id.getText();
+        classroom cr = new classroom(Stud_id);
+                cr.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                cr.setVisible(true);
+    }                                              
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String selectedCourse = jComboBox1.getSelectedItem().toString();
+    String studentId = sd_id.getText(); // Assuming you have this from the login process
+
+    try {
+        // Database connection
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+
+        // Find course ID based on selected course name
+        String sql = "SELECT course_id FROM Courses WHERE course_name = ?";
+        PreparedStatement courseStmt = con.prepareStatement(sql);
+        courseStmt.setString(1, selectedCourse);
+        ResultSet rs = courseStmt.executeQuery();
+
+        if (rs.next()) {
+            String courseId = rs.getString("course_id"); // Assuming course_id is VARCHAR or STRING
+
+            // Check if the student is already enrolled in this course
+            String checkEnrollmentSql = "SELECT * FROM Enrollments WHERE st_id = ? AND course_id = ?";
+            PreparedStatement checkStmt = con.prepareStatement(checkEnrollmentSql);
+            checkStmt.setString(1, studentId);
+            checkStmt.setString(2, courseId);
+            ResultSet checkRs = checkStmt.executeQuery();
+
+            if (checkRs.next()) {
+                // Student is already enrolled in this course
+                JOptionPane.showMessageDialog(null, "You are already enrolled in " + selectedCourse);
+            } else {
+                // Enroll student in the course
+                String enrollSql = "INSERT INTO Enrollments (st_id, course_id) VALUES (?, ?)";
+                PreparedStatement pstmt = con.prepareStatement(enrollSql);
+                pstmt.setString(1, studentId); // Assuming student ID is stored as VARCHAR in the DB
+                pstmt.setString(2, courseId);
+
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(null, "You have successfully enrolled in " + selectedCourse);
+            }
+
+            checkRs.close();
+            checkStmt.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "Course not found.");
+        }
+
+        rs.close();
+        courseStmt.close();
+        st.close();
+        con.close();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error enrolling in course: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }                                          
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+               stud_display sd1 =new stud_display();
+               sd1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               sd1.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JTextField sd_age;
+    private javax.swing.JTextField sd_id;
+    private javax.swing.JTextField sd_mail;
+    private javax.swing.JTextField sd_name;
+    private javax.swing.JTextField sd_std;
+    // End of variables declaration                   
+}
+
+--------------------------
+Parent_Display
+
+
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class Parent_display extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Parent_display
+     */
+    public Parent_display(String StudentId) {
+        initComponents();
+        sd_id.setText(StudentId);
+       
+    }
+
+    Parent_display() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+	private void sd_idActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }                                     
+
+    private void sd_nameActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    private void sd_stdActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        String studentId = sd_id.getText();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+        try {
+            Connection con = ConnectionProvider.getCon(); // Ensure you have a method to get the database connection
+
+            String sql = "SELECT c.course_id, c.course_name, qa.marks, qa.attempt_date " +
+            "FROM courses c " +
+            "JOIN enrollments e ON c.course_id = e.course_id " +
+            "JOIN quiz_attempts qa ON e.course_id = qa.course_id AND e.st_id = qa.student_id " +
+            "WHERE e.st_id = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, studentId);  // Set the student ID in the query
+            ResultSet rs = pstmt.executeQuery();
+
+            // Clear previous data in the table model
+            model.setRowCount(0);
+
+            // Loop through the result set and populate the table model
+            while (rs.next()) {
+                String courseId = rs.getString("course_id");
+                String courseName = rs.getString("course_name");
+                int marks = rs.getInt("marks");
+                java.sql.Date date = rs.getDate("attempt_date");
+
+                // Add a new row to the table model
+                model.addRow(new Object[]{courseId, courseName, marks, date});
+            }
+
+            // Close resources
+            rs.close();
+            pstmt.close();
+            con.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error loading course data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }                                              
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:String studentId = stud_id.getText(); // Get student ID
+        String studentId = sd_id.getText(); // Get student ID
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear previous rows
+
+        try {
+            // Database connection
+            Connection con = ConnectionProvider.getCon();
+
+            // Query to fetch attendance for the student
+            String sql = "SELECT c.course_name, a.attendance_date, a.status "
+            + "FROM Attendance a JOIN Courses c ON a.course_id = c.course_id "
+            + "WHERE a.st_id = ? ORDER BY a.attendance_date";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, studentId);
+            ResultSet rs = pstmt.executeQuery();
+
+            // Populate the table with attendance data
+            while (rs.next()) {
+                String courseName = rs.getString("course_name");
+                String date = rs.getString("attendance_date");
+                String status = rs.getString("status");
+
+                // Add row to table
+                model.addRow(new Object[]{courseName, date, status});
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error fetching attendance: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }                                              
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        String s_id = sd_id.getText();
+        try {
+        // Establish database connection
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+
+        // SQL query to check user credentials
+        String sql = "SELECT * FROM student WHERE st_id = '" + s_id + "'";
+        ResultSet rs = st.executeQuery(sql);
+
+        // Check if the user exists
+        if (rs.next()) {
+            // Retrieve student details from the ResultSet
+            
+            String studentName = rs.getString("name");
+            String studentStd = rs.getString("stnd");
+            sd_name.setText(studentName);
+            sd_std.setText(studentStd);
+           
+        }
+        } 
+        catch (SQLException e) {
+        // SQL-related exceptions
+        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Catch any other general exceptions
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage());
+        e.printStackTrace();
+    }    
+        
+        
+    }                                        
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+         parent_login pl =new parent_login();
+               pl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               pl.setVisible(true);
+    }                                              
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Parent_display pd = new Parent_display();
+                pd.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                pd.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField sd_id;
+    private javax.swing.JTextField sd_name;
+    private javax.swing.JTextField sd_std;
+    // End of variables declaration                   
+}
+---------------------
+Teacher_Display
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class teach_display extends javax.swing.JFrame {
+
+    /**
+     * Creates new form teach_display
+     */
+     public teach_display(String TeacherId,String TeacherName, String CourseId, String CourseName) {
+        initComponents();
+        id1.setText(TeacherId);
+        t_name.setText(TeacherName);
+        co_id.setText(CourseId);
+        course.setText(CourseName);
+        loadStudentsForTeacher();
+    }
+    
+    public teach_display() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+       teacher_login tl =new teacher_login();
+       tl.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       tl.setVisible(true);
+    }                                              
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        System.out.println("Button Pressed");  // Check if the method is triggered
+
+    // Get input values from text fields
+    String stud1 = std_id.getText();    // Student ID input from teacher
+    String courseId = co_id.getText();  // Course ID already set from the teacher login module
+    String status = jComboBox1.getSelectedItem().toString();  // Attendance status from comboBox
+
+    if (stud1.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter a student ID.");
+        return;
+    }
+
+    try {
+        // Database connection
+        Connection con = ConnectionProvider.getCon();
+
+        // Check if the student is enrolled in the course
+        String enrollmentCheckSql = "SELECT * FROM Enrollments WHERE st_id = ? AND course_id = ?";
+        PreparedStatement enrollmentCheckStmt = con.prepareStatement(enrollmentCheckSql);
+        enrollmentCheckStmt.setString(1, stud1);
+        enrollmentCheckStmt.setString(2, courseId);
+        ResultSet enrollmentCheckResult = enrollmentCheckStmt.executeQuery();
+
+        if (!enrollmentCheckResult.next()) {
+            JOptionPane.showMessageDialog(null, "Student is not enrolled in this course.");
+            return;
+        }
+
+        // Check if attendance is already recorded for today
+        String attendanceCheckSql = "SELECT * FROM Attendance WHERE st_id = ? AND course_id = ? AND attendance_date = CURDATE()";
+        PreparedStatement attendanceCheckStmt = con.prepareStatement(attendanceCheckSql);
+        attendanceCheckStmt.setString(1, stud1);
+        attendanceCheckStmt.setString(2, courseId);
+        ResultSet attendanceCheckResult = attendanceCheckStmt.executeQuery();
+
+        if (attendanceCheckResult.next()) {
+            JOptionPane.showMessageDialog(null, "Attendance already recorded for this student today.");
+            return;
+        }
+
+        // Insert attendance record into Attendance table
+        String sql = "INSERT INTO Attendance (st_id, course_id, attendance_date, status) VALUES (?, ?, NOW(), ?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, stud1);
+        pstmt.setString(2, courseId);  // Use pre-set course ID
+        pstmt.setString(3, status);
+        pstmt.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "Attendance recorded successfully.");
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        // Retrieve all attendance records for today and the specified course
+        String retrieveSql = "SELECT st_id, course_id, attendance_date, status FROM Attendance WHERE course_id = ? AND attendance_date = CURDATE()";
+        PreparedStatement retrieveStmt = con.prepareStatement(retrieveSql);
+        retrieveStmt.setString(1, courseId);
+        ResultSet rs = retrieveStmt.executeQuery();
+
+        // Add each record to the JTable
+        while (rs.next()) {
+            String studentId = rs.getString("st_id");
+            String retrievedCourseId = rs.getString("course_id");
+            Date attendanceDate = rs.getDate("attendance_date");
+            String attendanceStatus = rs.getString("status");
+
+            model.addRow(new Object[]{studentId, retrievedCourseId, attendanceDate, attendanceStatus});
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error recording attendance: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }                                              
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+    
+    // Set the dialog title
+    fileChooser.setDialogTitle("Select a Video to Upload");
+
+    // Set file selection mode (files only, not directories)
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    // Show the open dialog and check if the user selects a file
+    int result = fileChooser.showOpenDialog(this);
+    
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+        
+        // Extract file details
+        String filePath = selectedFile.getAbsolutePath();
+        String fileName = selectedFile.getName();
+
+        System.out.println("File Selected: " + filePath);
+
+        // Insert file information into the database
+        String courseId = co_id.getText();  // Assuming courseId is already set
+        try {
+            Connection con = ConnectionProvider.getCon();
+            String sql = "INSERT INTO Videos (course_id, video_title, video_url) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, courseId);
+            pstmt.setString(2, fileName);  // Use the file name as video title
+            pstmt.setString(3, filePath);  // Store the file path as video URL
+            pstmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Video uploaded successfully.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error uploading video: " + e.getMessage());
+            e.printStackTrace();
+        }
+    } else {
+        // User canceled the file selection
+        JOptionPane.showMessageDialog(null, "No video selected.");
+    }
+    }                                             
+
+    private void id1ActionPerformed(java.awt.event.ActionEvent evt) {                                    
+        // TODO add your handling code here:
+    }                                   
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        String teacherSubject = co_id.getText(); // Retrieve from teacher's session or database
+        String teacherId = id1.getText();      // Retrieve teacher's ID similarly
+
+                create_quiz crqz = new create_quiz(teacherSubject, teacherId);
+                crqz.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                crqz.setVisible(true);
+        
+    }                                              
+    private void loadStudentsForTeacher() {
+        String teacherId = id1.getText();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel(); // Assuming jTable2 is the JTable for students
+
+    model.setRowCount(0); // Clear any existing rows
+
+    try {
+        // Database connection
+        Connection con = ConnectionProvider.getCon(); // Assuming you have a method for getting DB connection
+        String sql = "SELECT s.st_id, s.name " +
+                     "FROM Student s " +
+                     "JOIN Enrollments e ON s.st_id = e.st_id " +
+                     "JOIN Courses c ON e.course_id = c.course_id " +
+                     "WHERE c.t_id = ?";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, teacherId); // Set the teacher ID parameter
+
+        ResultSet rs = pstmt.executeQuery();
+
+        // Loop through the result set and add rows to the table model
+        while (rs.next()) {
+            String studentId = rs.getString("st_id");
+            String studentName = rs.getString("name");
+            
+
+            // Add the row to the JTable model
+            model.addRow(new Object[]{studentId, studentName});
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error loading students: " + e.getMessage());
+    }
+}
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+ java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+                teach_display td =new teach_display();
+               td.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               td.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField co_id;
+    private javax.swing.JTextField course;
+    private javax.swing.JTextField id1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField std_id;
+    private javax.swing.JTextField t_name;
+    // End of variables declaration                   
+}
+------------------------------------
+ClassRoom
+
+import javax.swing.JFrame;
+import Project.ConnectionProvider;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.print.attribute.standard.Media;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class classroom extends javax.swing.JFrame {
+
+    /**
+     * Creates new form classroom
+     */
+    public classroom(String Stud_id) {
+        initComponents();
+        String s1_id=Stud_id;
+        sid.setText(s1_id);
+    }
+
+    private classroom() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+	private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+               stud_display sd1 =new stud_display();
+               sd1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               sd1.setVisible(true);
+    }                                              
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+         loadVideosForCourse();
+    }                                              
+
+    private void videosTableMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        int row = videosTable.getSelectedRow(); // Get the selected row index
+        if (row != -1) { // Check if a row is selected
+            String videoUrl = (String) videosTable.getValueAt(row, 1); // Get the video URL from the second column
+            playVideo(videoUrl); // Call the playVideo method with the selected video URL
+        }
+    }                                        
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        String Student_id=sid.getText();
+        String Course_id =cour_id.getText();
+        
+        quiz qz = new quiz(Student_id,Course_id);
+                qz.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                qz.setVisible(true);
+    }                                              
+
+    private void loadVideosForCourse() {
+    
+        DefaultTableModel model = (DefaultTableModel) videosTable.getModel(); // Assuming you have a JTable named videosTable
+    
+        model.setRowCount(0); // Clear existing rows
+        String courseId = cour_id.getText();
+        try {
+            Connection con = ConnectionProvider.getCon();
+            String sql = "SELECT video_title, video_url FROM Videos WHERE course_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, courseId);
+            ResultSet rs = pstmt.executeQuery();
+        
+                while (rs.next()) 
+                {
+                    String videoTitle = rs.getString("video_title");
+                    String videoUrl = rs.getString("video_url");
+                    model.addRow(new Object[]{videoTitle, videoUrl}); // Add each video to the table
+                }
+            } 
+        catch (SQLException e) 
+        {
+                   JOptionPane.showMessageDialog(null, "Error loading videos: " + e.getMessage());
+        }
+}
+     private void playVideo(String videoUrl) {
+        try {
+            // Command to run VLC media player and play the video
+            String command = "\"C:\\Program Files\\VideoLAN\\VLC\\vlc.exe\" \"" + videoUrl + "\"";
+
+
+            // Execute the command
+            Runtime.getRuntime().exec(command);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error playing video: " + e.getMessage());
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+                classroom cr = new classroom();
+                cr.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                cr.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField cour_id;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField sid;
+    private javax.swing.JTable videosTable;
+    // End of variables declaration                   
+}
+
+-------------------------
+Quiz
+
+
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class quiz extends javax.swing.JFrame {
+    private String studentId;
+    private String courseId;
+    private int marks = 0;  // Initialize total marks
+    private int correctOption;  // Correct option for the current question
+    private ResultSet rs; 
+    
+    /**
+     * Creates new form quiz
+     */
+    public quiz(String studentId, String courseId) {
+        initComponents();
+        this.studentId = studentId;
+        this.courseId = courseId;
+        loadQuizQuestions(courseId);  // Load quiz questions when quiz form opens
+    }
+
+    private quiz() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+	 private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+       
+    private void loadQuizQuestions(String courseId) {
+    try {
+        // Establish database connection
+        Connection con = ConnectionProvider.getCon();
+        
+        // Get the current date
+        java.sql.Date today = new java.sql.Date(System.currentTimeMillis());
+
+        String checkSql = "SELECT COUNT(*) FROM quiz_attempts WHERE student_id = ? AND course_id = ? AND attempt_date = ?";
+            PreparedStatement checkStmt = con.prepareStatement(checkSql);
+            checkStmt.setString(1, studentId);  // Set studentId
+            checkStmt.setString(2, courseId);    // Set courseId
+            checkStmt.setDate(3, today);          // Set today's date
+            ResultSet countRs = checkStmt.executeQuery();
+
+            if (countRs.next() && countRs.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(null, "You have already attempted the quiz today.");
+                return;
+            }
+            
+        // Fetch the student's standard from the database
+        String studentStandard = null;
+        String standardSql = "SELECT stnd FROM student WHERE st_id = ?";
+        PreparedStatement standardStmt = con.prepareStatement(standardSql);
+        standardStmt.setString(1, studentId);  // Set studentId
+        ResultSet studentRs = standardStmt.executeQuery();
+        
+        if (studentRs.next()) {
+            studentStandard = studentRs.getString("stnd");
+        } else {
+            JOptionPane.showMessageDialog(null, "Student record not found.");
+            return;
+        }
+
+        // Prepare SQL query to fetch today's questions for the matching course and standard
+        String sql = "SELECT question_text, option_a, option_b, option_c, option_d, correct_option " +
+                     "FROM Questions WHERE course_id = ? AND standard = ? AND q_date = ?";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, courseId);          
+        pstmt.setString(2, studentStandard);   
+        pstmt.setDate(3, today);              
+
+        rs = pstmt.executeQuery();
+
+        // Load the first question
+        if (rs.next()) {
+            displayQuestion();  // Display the first question
+        } else {
+            JOptionPane.showMessageDialog(null, "No quiz questions found for today or for your standard.");
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error fetching quiz questions: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+    
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        try {
+            // Get the selected option from JRadioButtons
+            int selectedOption = getSelectedOption();  // Helper method to get selected option
+
+            // Compare with the correct option
+            if (selectedOption == correctOption) {
+                marks += 10;  // Add 10 points for correct answer
+            }
+
+            // Move to the next question
+            if (rs.next()) {
+                displayQuestion();  // Display the next question
+            } else {
+                // End of quiz
+                saveQuizResults(studentId, courseId, marks);  // Save the results to the database
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error submitting quiz: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }                                              
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+       // classroom cr = new classroom(studentId);
+       //         cr.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       //         cr.setVisible(true);
+    }                                        
+
+    /**
+     * @param args the command line arguments
+     */
+    
+   
+    
+ 
+    private void displayQuestion() throws SQLException {
+        
+        String question = rs.getString("question_text");
+        String option1 = rs.getString("option_a");
+        String option2 = rs.getString("option_b");
+        String option3 = rs.getString("option_c");
+        String option4 = rs.getString("option_d");
+        correctOption = rs.getInt("correct_option");  // Store the correct option
+
+        // Assuming you have GUI components for displaying the question and options
+        jLabel3.setText(question);
+        jRadioButton1.setText(option1);
+        jRadioButton2.setText(option2);
+        jRadioButton3.setText(option3);
+        jRadioButton4.setText(option4);
+    }
+
+    
+    private int getSelectedOption() {
+        if (jRadioButton1.isSelected()) {
+            return 1;
+        } else if (jRadioButton2.isSelected()) {
+            return 2;
+        } else if (jRadioButton3.isSelected()) {
+            return 3;
+        } else if (jRadioButton4.isSelected()) {
+            return 4;
+        }
+        return -1;  // No option selected
+    }
+    
+    private void saveQuizResults(String studentId, String courseId, int marks) {
+        try {
+            Connection con = ConnectionProvider.getCon();
+            // Insert the attempt into the quiz_attempts table
+            String insertSql = "INSERT INTO quiz_attempts (student_id, course_id, attempt_date, marks) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(insertSql);
+            pstmt.setString(1, studentId);
+            pstmt.setString(2, courseId);
+            pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));  // Set today's date
+            pstmt.setInt(4, marks);
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Quiz results saved successfully.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+        
+    
+    public static void main(String args[]) {
+	
+	 java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+                quiz qz = new quiz();
+                qz.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                qz.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JToggleButton jToggleButton1;
+    // End of variables declaration                   
+}
+------------------------
+Create_Quiz
+
+import Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
+/**
+ *
+ * @author kirubaharan
+ */
+public class create_quiz extends javax.swing.JFrame {
+
+    /**
+     * Creates new form create_quiz
+     */
+    public create_quiz(String teacherSubject, String teacherId) {
+        initComponents();
+         t1_id.setText(teacherId);
+        ts1.setText(teacherSubject);
+        t1_id.setEditable(false);
+        ts1.setEditable(false);
+        
+    }
+
+    create_quiz() {
+        
+       
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        
+    }
+
+private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        
+        String Ques = ques.getText();
+        String opt1 = op1.getText();
+        String opt2 = op2.getText();
+        String opt3 = op3.getText();
+        String opt4 = op4.getText();
+        String ans = res.getText();
+        String t2_id= t1_id.getText();
+        String ts2= ts1.getText();
+        String d1=dte.getText();
+        int ans1=Integer.parseInt(ans);
+        String stand=stnd.getText();
+        
+        saveQuizToDatabase(Ques, stand,opt1, opt2, opt3, opt4, ans1, ts2, t2_id,d1);
+                                                  
+    }                                              
+
+    private void dteActionPerformed(java.awt.event.ActionEvent evt) {                                    
+        // TODO add your handling code here:
+    }                                   
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+         teach_display td =new teach_display();
+               td.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               td.setVisible(true);
+    }                                        
+        
+    
+    
+     private void saveQuizToDatabase(String question,String stand ,String option1, String option2, String option3, String option4, Integer answer, String courseId, String teacherId, String d1) {
+    try {
+        // Establish database connection
+        Connection con = ConnectionProvider.getCon();
+        String sql = "INSERT INTO Questions (course_id, t_id,standard,question_text, option_a, option_b, option_c, option_d, correct_option, q_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        // Parse the date from the string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate quizDate = LocalDate.parse(d1, formatter);  // Assuming the date is in "yyyy-MM-dd" format
+        java.sql.Date sqlDate = java.sql.Date.valueOf(quizDate);  // Convert to SQL date
+        
+        // Set parameters for the SQL query
+        pstmt.setString(1, courseId);  // Set course_id
+        pstmt.setString(2, teacherId); 
+        pstmt.setString(3, stand);
+        pstmt.setString(4, question);  // Set question text
+        pstmt.setString(5, option1);   // Set option_a
+        pstmt.setString(6, option2);   // Set option_b
+        pstmt.setString(7, option3);   // Set option_c
+        pstmt.setString(8, option4);   // Set option_d
+        pstmt.setInt(9, answer);       // Set correct_option
+        pstmt.setDate(10, sqlDate);     // Set q_date
+        
+        // Execute the update
+        int rowsAffected = pstmt.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Quiz created successfully!");
+            // Optionally reset fields after saving
+            ques.setText("");
+            op1.setText("");
+            op2.setText("");
+            op3.setText("");
+            op4.setText("");
+            res.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to create quiz. Please try again.");
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error while creating quiz: " + e.getMessage());
+    }
+}
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+	 java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+                create_quiz crqz = new create_quiz();
+                crqz.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                crqz.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField dte;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField op1;
+    private javax.swing.JTextField op2;
+    private javax.swing.JTextField op3;
+    private javax.swing.JTextField op4;
+    private javax.swing.JTextField ques;
+    private javax.swing.JTextField res;
+    private javax.swing.JTextField stnd;
+    private javax.swing.JTextField t1_id;
+    private javax.swing.JTextField ts1;
+    // End of variables declaration                   
+}
+------------------------
+
+	
+
+
