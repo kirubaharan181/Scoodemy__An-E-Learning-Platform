@@ -39,37 +39,6 @@ The project is built in **NetBeans** using the Swing GUI builder (`.form` + `.ja
 
 ---
 
-## 📂 Project Structure
-
-```text
-learning_platform/src/main/java/
-├─ com/                         # (package files if used)
-├─ DriverManager/                # DB driver classes
-├─ images/                       # UI resources (e.g., stud.jpeg)
-├─ Project/                      # project-specific files
-├─ src/                          # (NetBeans build src)
-├─ target/                       # (build output)
-├─ Add_teacher.java              # Add teacher (Admin module)
-├─ admin_login.java              # Admin login
-├─ admin_mgmt.java               # Admin dashboard/management
-├─ classroom.java                # Classroom creation/management
-├─ create_quiz.java              # Quiz creation (Teacher module)
-├─ DriverManager.java            # Database connection helper
-├─ enroll_course.java            # Student course enrollment
-├─ four.java                     # (utility/test file)
-├─ login_entry.java              # Common login entry point
-├─ Parent_display.java           # Parent dashboard
-├─ parent_login.java             # Parent login screen
-├─ par_log.java                  # Parent login (alt)
-├─ quiz.java                     # Quiz attempt/play
-├─ stud_display.java             # Student dashboard
-├─ student_login.java            # Student login
-├─ stud_signUp.java              # Student sign-up
-├─ teacher_login.java            # Teacher login
-└─ teach_display.java            # Teacher dashboard
-
----
-
 ⚙️ Setup Instructions
 
 Install JDK 8+ and MySQL.
@@ -113,3 +82,35 @@ Notifications for parents and students.
 File sharing (assignments/resources).
 
 Role-based dashboards with analytics.
+
+---
+
+## 📂 Project Structure
+
+```text
+learning_platform/src/main/java/
+├─ com/                         # (package files if used)
+├─ DriverManager/                # DB driver classes
+├─ images/                       # UI resources (e.g., stud.jpeg)
+├─ Project/                      # project-specific files
+├─ src/                          # (NetBeans build src)
+├─ target/                       # (build output)
+├─ Add_teacher.java              # Add teacher (Admin module)
+├─ admin_login.java              # Admin login
+├─ admin_mgmt.java               # Admin dashboard/management
+├─ classroom.java                # Classroom creation/management
+├─ create_quiz.java              # Quiz creation (Teacher module)
+├─ DriverManager.java            # Database connection helper
+├─ enroll_course.java            # Student course enrollment
+├─ four.java                     # (utility/test file)
+├─ login_entry.java              # Common login entry point
+├─ Parent_display.java           # Parent dashboard
+├─ parent_login.java             # Parent login screen
+├─ par_log.java                  # Parent login (alt)
+├─ quiz.java                     # Quiz attempt/play
+├─ stud_display.java             # Student dashboard
+├─ student_login.java            # Student login
+├─ stud_signUp.java              # Student sign-up
+├─ teacher_login.java            # Teacher login
+└─ teach_display.java            # Teacher dashboard
+
