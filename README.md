@@ -68,6 +68,8 @@ learning_platform/src/main/java/
 ├─ teacher_login.java            # Teacher login
 └─ teach_display.java            # Teacher dashboard
 
+---
+
 ⚙️ Setup Instructions
 
 Install JDK 8+ and MySQL.
@@ -88,6 +90,8 @@ Update database credentials in DriverManager.java (or equivalent).
 
 Set login_entry.java as the main class to run the system.
 
+---
+
 ▶️ User Flows
 
 Admin: login → add teachers → manage platform.
@@ -97,6 +101,8 @@ Teacher: login → create classes/quizzes → view enrolled students.
 Student: sign up/login → enroll in courses → attend quizzes → view results.
 
 Parent: login → check child’s progress and performance.
+
+---
 
 🚀 Future Improvements
 
